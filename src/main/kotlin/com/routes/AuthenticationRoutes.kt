@@ -21,14 +21,14 @@ fun Route.authenticationRouting() {
         post {
             val userCredentials = call.receive<UserCredentials>()
             val username = userCredentials.email.lowercase(Locale.getDefault())
-            val password = userCredentials.password
+            val password = userCredentials.hashPassword()
 
             db.insert(UserEntity) {
                 set(it.email, username)
                 set(it.password, password)
             }
 
-            call.respondText { "Credentials received" }
+            call.respondText { "User created successfully!" }
         }
     }
 }
