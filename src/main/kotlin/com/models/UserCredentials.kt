@@ -8,4 +8,8 @@ data class UserCredentials(val email: String, val password: String){
     fun hashPassword(): String{
         return BCrypt.hashpw(password, BCrypt.gensalt())
     }
+
+    fun isValidCredentials(): Boolean{
+        return email.length >= 3 && password.length >= 6
+    }
 }
