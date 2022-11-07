@@ -1,5 +1,6 @@
 package com.plugins
 
+import com.routes.authenticationRouting
 import com.routes.notesRouting
 import io.ktor.server.routing.*
 import io.ktor.server.application.*
@@ -14,6 +15,7 @@ fun Application.configureRouting() {
         }
         usersRouting()
         notesRouting()
+        authenticationRouting()
     }
 
 }

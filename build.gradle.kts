@@ -33,4 +33,5 @@ dependencies {
     implementation("org.ktorm:ktorm-core:3.5.0")
     implementation("mysql:mysql-connector-java:8.0.31")
     implementation("io.github.cdimascio:dotenv-kotlin:6.3.1")
+    implementation("org.mindrot:jbcrypt:0.4")
 }

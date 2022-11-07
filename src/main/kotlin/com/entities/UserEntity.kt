@@ -6,7 +6,6 @@ import org.ktorm.schema.varchar
 
 object UserEntity: Table<Nothing>("user") {
     val id = int("id").primaryKey()
-    val name = varchar("name")
-    val age = int("age")
     val email = varchar("email")
+    val password = varchar("password")
 }

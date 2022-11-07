@@ -3,5 +3,4 @@ package com.models
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class User(val id: Int, val email: String, val password: String) {
-}
+data class UserCredentials(val email: String, val password: String)

@@ -22,11 +22,10 @@ fun Route.usersRouting() {
             try {
                 val users = db.from(UserEntity).select().map {
                     val id = it[UserEntity.id]
-                    val name = it[UserEntity.name]
-                    val age = it[UserEntity.age]
                     val email = it[UserEntity.email]
-                    if (id != null && name != null && age != null && email != null) {
-                        User(id, name, age, email)
+                    val password = it[UserEntity.password]
+                    if (id != null && email != null && password != null) {
+                        User(id, email, password)
                     } else {
                         call.respondText ( "Something went wrong", status = HttpStatusCode.InternalServerError )
                     }
@@ -46,11 +45,10 @@ fun Route.usersRouting() {
             try {
                 val user = db.from(UserEntity).select().where { UserEntity.id eq id.toInt() }.map {
                     val id = it[UserEntity.id]
-                    val name = it[UserEntity.name]
-                    val age = it[UserEntity.age]
                     val email = it[UserEntity.email]
-                    if (id != null && name != null && age != null && email != null) {
-                        User(id, name, age, email)
+                    val password = it[UserEntity.password]
+                    if (id != null && email != null && password != null ) {
+                        User(id, email, password)
                     } else {
                         call.respondText ( "Something went wrong", status = HttpStatusCode.InternalServerError )
                     }
@@ -70,9 +68,8 @@ fun Route.usersRouting() {
             val newUser = call.receive<NewUser>()
             try {
                 db.insert(UserEntity) {
-                    set(it.name, newUser.name)
-                    set(it.age, newUser.age)
                     set(it.email, newUser.email)
+                    set(it.password, newUser.password)
                 }
                 call.respondText("User created correctly", status = HttpStatusCode.Created)
             } catch (e: Exception) {
@@ -107,9 +104,8 @@ fun Route.usersRouting() {
             val updatedUser = call.receive<NewUser>()
             try {
                 db.update(UserEntity) {
-                    set(it.name, updatedUser.name)
-                    set(it.age, updatedUser.age)
                     set(it.email, updatedUser.email)
+                    set(it.password, updatedUser.password)
                     where { it.id eq id.toInt() }
                 }
                 call.respondText("User updated correctly!", status = HttpStatusCode.Accepted)
